@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdursley <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/16 20:21:01 by pdursley          #+#    #+#             */
-/*   Updated: 2021/10/16 20:21:03 by pdursley         ###   ########.fr       */
+/*   Created: 2022/02/23 19:17:15 by pdursley          #+#    #+#             */
+/*   Updated: 2022/02/23 19:17:15 by pdursley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+void	ft_free_stack(t_stack **stack)
 {
-	char	*result;
-	int		i;
+	t_stack	*start;
+	t_stack	*next;
 
-	i = 0;
-	if (!s1 || !s2)
-		return (NULL);
-	result = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (result == NULL)
-		return (NULL);
-	while (*s1 != '\0')
-		result[i++] = *(s1++);
-	while (*s2 != '\0')
-		result[i++] = *(s2++);
-	result[i] = '\0';
-	return (result);
+	start = *stack;
+	while (start)
+	{
+		next = start->next;
+		free(start);
+		start = next;
+	}
+	*stack = NULL;
+}
+
+void	ft_free(t_all *all)
+{
+	ft_free_stack(&all->stack_a);
+	ft_free_stack(&all->stack_b);
 }

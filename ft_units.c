@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_units.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdursley <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/23 19:17:50 by pdursley          #+#    #+#             */
+/*   Updated: 2022/02/23 19:17:50 by pdursley         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	ft_checkk(unsigned long result, int sign)
@@ -9,7 +21,7 @@ int	ft_checkk(unsigned long result, int sign)
 	return (1);
 }
 
-int64_t ft_atoii(const char *str)
+int64_t	ft_atoii(const char *str)
 {
 	int				i;
 	unsigned long	result;
@@ -41,7 +53,7 @@ void	ft_min_max(int64_t res, char **mass_str)
 {
 	if (res > 2147483647 || res < -2147483648)
 	{
-		free(mass_str);
+		ft_clean_split(mass_str);
 		ft_error();
 	}
 }

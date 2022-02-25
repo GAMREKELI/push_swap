@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+
 static char	*ft_writing_word(char *dst, char const *src, char ch)
 {
 	int	j;
@@ -76,7 +77,8 @@ static	char	**ft_result_res(char **res, char c, char const *s)
 			i++;
 		else
 		{
-			if (!(word = (char *)malloc((ft_wordlen(&s[i], c) + 1) * sizeof(char))))
+			word = (char *)malloc((ft_wordlen(&s[i], c) + 1) * sizeof(char));
+			if (!word)
 				return (NULL);
 			res[++k] = ft_writing_word(word, &s[i], c);
 			while ((s[i] == c || s[i] == '\0') == 0)
@@ -90,14 +92,14 @@ static	char	**ft_result_res(char **res, char c, char const *s)
 char	**ft_split(char const *s, char c)
 {
 	char	**res;
-	int		N;
+	int		n;
 
 	if (!s)
 		return (NULL);
-	N = kol_word(s, c);
-	if (!N)
-		return(NULL);
-	res = (char **)malloc((N + 1) * sizeof(char *));
+	n = kol_word(s, c);
+	if (!n)
+		return (NULL);
+	res = (char **)malloc((n + 1) * sizeof(char *));
 	if (res == 0)
 		return (NULL);
 	res = ft_result_res(res, c, s);

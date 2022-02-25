@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+
 int	ft_check(unsigned long result, int sign)
 {
 	if (result >= 9223372036854775807 && sign > 0)

@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_stack_null.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdursley <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/16 20:21:01 by pdursley          #+#    #+#             */
-/*   Updated: 2021/10/16 20:21:03 by pdursley         ###   ########.fr       */
+/*   Created: 2022/02/23 19:17:41 by pdursley          #+#    #+#             */
+/*   Updated: 2022/02/23 19:17:41 by pdursley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+void	ft_stack_null(t_all *stack, t_stack *list)
 {
-	char	*result;
-	int		i;
-
-	i = 0;
-	if (!s1 || !s2)
-		return (NULL);
-	result = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (result == NULL)
-		return (NULL);
-	while (*s1 != '\0')
-		result[i++] = *(s1++);
-	while (*s2 != '\0')
-		result[i++] = *(s2++);
-	result[i] = '\0';
-	return (result);
+	stack->stack_a = NULL;
+	stack->stack_b = NULL;
+	list->score = 0;
 }

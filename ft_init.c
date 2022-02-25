@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_init.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdursley <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/23 19:17:18 by pdursley          #+#    #+#             */
+/*   Updated: 2022/02/23 19:17:18 by pdursley         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	ft_contein(t_stack *stack, int num)
 {
 	while (stack)
 	{
-		if(stack->num == num)
+		if (stack->num == num)
 			return (0);
 		stack = stack->next;
 	}
@@ -16,23 +28,22 @@ void	ft_initiation(t_stack *element, int number, int flag)
 	element->num = number;
 	element->index = flag;
 	element->next = NULL;
-	element->next_st = NULL;
-
 }
 
-void	ft_init_push(t_stack **stack, int number, t_all *all, char **mass)
+void	ft_init_push(t_stack **stack, int number, char **mass)
 {
 	t_stack	*element;
 	t_stack	*last;
 
 	last = *stack;
-	if (!ft_contein(*stack, number))
+	element = (t_stack *)malloc(sizeof(t_stack));
+	if (!ft_contein(*stack, number) || !element)
 	{
 		ft_clean_split(mass);
+		free(mass);
+		ft_free_stack(stack);
 		ft_error();
 	}
-	if (!(element = (t_stack *)malloc(sizeof(t_stack))))
-		ft_error();
 	ft_initiation(element, number, -1);
 	if (!last)
 	{
@@ -42,7 +53,6 @@ void	ft_init_push(t_stack **stack, int number, t_all *all, char **mass)
 	while (last->next)
 		last = last->next;
 	last->next = element;
-	last->next_st = element;
 }
 
 void	ft_copying(int argc, char **argv, t_all *all)
@@ -52,18 +62,29 @@ void	ft_copying(int argc, char **argv, t_all *all)
 	char	**mass_str;
 
 	i = 1;
+	all->len_a = 0;
 	while (i < argc)
 	{
 		j = -1;
-		if (!(mass_str = ft_split(argv[i], ' ')))
+		mass_str = ft_split(argv[i], ' ');
+		if (!mass_str)
 			ft_error();
 		while (mass_str[++j])
 		{
 			ft_min_max(ft_atoii(mass_str[j]), mass_str);
-			ft_init_push(&(all->stack_a), ft_atoii(mass_str[j]), all, mass_str);
-			free(mass_str[j]);
+			ft_init_push(&(all->stack_a), ft_atoii(mass_str[j]), mass_str);
+			all->len_a ++;
 		}
+		ft_clean_split(mass_str);
 		free(mass_str);
-		i++;	
+		i++;
 	}
+}
+
+void	ft_initscore(t_score *score)
+{
+	score->count_a = -1;
+	score->count_a = -1;
+	score->flag_a = 0;
+	score->flag_b = 0;
 }

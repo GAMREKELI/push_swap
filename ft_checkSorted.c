@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_checkSorted.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdursley <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/16 20:21:01 by pdursley          #+#    #+#             */
-/*   Updated: 2021/10/16 20:21:03 by pdursley         ###   ########.fr       */
+/*   Created: 2022/02/23 19:17:09 by pdursley          #+#    #+#             */
+/*   Updated: 2022/02/23 19:17:09 by pdursley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+int	ft_sortedstack(t_stack **stack)
 {
-	char	*result;
-	int		i;
+	t_stack	*list;
+	t_stack	*next;
 
-	i = 0;
-	if (!s1 || !s2)
-		return (NULL);
-	result = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (result == NULL)
-		return (NULL);
-	while (*s1 != '\0')
-		result[i++] = *(s1++);
-	while (*s2 != '\0')
-		result[i++] = *(s2++);
-	result[i] = '\0';
-	return (result);
+	list = *stack;
+	next = list->next;
+	while (list && next)
+	{
+		if (next->num > list->num)
+		{
+			list = next;
+			next = list->next;
+		}
+		else
+			return (0);
+	}
+	return (1);
 }

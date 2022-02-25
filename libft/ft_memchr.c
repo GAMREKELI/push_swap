@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+
 void	*ft_memchr(const void *str, int ch, size_t vol)
 {
 	unsigned char	*string;

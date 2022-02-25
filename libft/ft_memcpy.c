@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+
 void	*ft_memcpy(void *str, const void *src, size_t vol)
 {
 	unsigned char	*string_1;

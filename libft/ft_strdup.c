@@ -11,10 +11,11 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+
 char	*ft_strdup(const char *str)
 {
 	char	*string;
-	size_t	len;
+	int		len;
 	int		i;
 
 	len = ft_strlen(str);
@@ -24,8 +25,7 @@ char	*ft_strdup(const char *str)
 	i = 0;
 	while (len != 0)
 	{
-		string[i] = str[i];
-		i++;
+		string[i++] = *(str++);
 		len--;
 	}
 	string[i] = '\0';

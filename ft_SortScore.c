@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_SortScore.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdursley <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/09 21:17:30 by pdursley          #+#    #+#             */
-/*   Updated: 2021/10/14 21:44:55 by pdursley         ###   ########.fr       */
+/*   Created: 2022/02/23 19:17:38 by pdursley          #+#    #+#             */
+/*   Updated: 2022/02/23 19:17:38 by pdursley         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t vol)
+void	ft_sortscore(t_all *all, t_score *score)
 {
-	size_t	len;
-	int		i;
-
-	i = 0;
-	len = 0;
-	while (src[len] != '\0')
+	while (score->count_a > 0)
 	{
-		len++;
+		if (score->flag_a == -1)
+			ft_reverserotate_a(&all->stack_a, 1);
+		else
+			ft_rotate_a(&all->stack_a, 1);
+		score->count_a--;
 	}
-	if (vol == 0)
-		return (len);
-	while (src[i] != '\0' && (vol - 1) != 0)
+	while (score->count_b > 0)
 	{
-		dst[i] = src[i];
-		i++;
-		vol--;
+		if (score->flag_b == -1)
+			ft_reverserotate_b(&all->stack_b, 1);
+		else
+			ft_rotate_b(&all->stack_b, 1);
+		score->count_b--;
 	}
-	dst[i] = '\0';
-	return (len);
+	ft_push_a(all, 1);
 }

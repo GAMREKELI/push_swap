@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_push_swap.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdursley <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/23 19:17:57 by pdursley          #+#    #+#             */
+/*   Updated: 2022/02/23 19:17:57 by pdursley         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	ft_error(void)
@@ -6,32 +18,40 @@ void	ft_error(void)
 	exit(0);
 }
 
-void	ft_stack_null(t_all *stack)
+void	ft_stack_null(t_all *stack, t_stack *list)
 {
 	stack->stack_a = NULL;
 	stack->stack_b = NULL;
+	list->score = 0;
+}
+
+void	ft_sorted(t_all *all)
+{
+	if (all->len_a <= 3)
+		ft_sortedthree(all);
+	else if (all->len_a <= 5)
+		ft_sortedfive(all);
+	else
+		ft_globalsort(all);
 }
 
 int	main(int argc, char *argv[])
 {
 	t_stack		list;
 	t_all		all;
-	int i;
 
-	ft_stack_null(&all);
+	ft_stack_null(&all, &list);
 	if (argc < 2)
 		return (0);
-	if(ft_parse(argc, argv))
+	if (ft_parse(argc, argv))
 	{
 		ft_copying(argc, argv, &all);
+		if (!ft_sortedstack(&(all.stack_a)))
+		{
+			ft_list_sort(all.stack_a, &all);
+			ft_sorted(&all);
+		}
 	}
-	while (all.stack_a)
-	{
-		printf("%d\n", all.stack_a->num);
-		all.stack_a = all.stack_a->next;
-	}
+	ft_free(&all);
 	return (0);
 }
-
-// ------ gcc -Wextra push_swap.c parse.c push_swap.h ./libft/libft.h ./libft/ft_atoi.c ft_init.c  
-// ------ ft_check.c ./libft/ft_isdigit.c ./libft/ft_split.c ft_units.c 

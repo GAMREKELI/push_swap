@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+
 char	*ft_strnstr(const char *dst, const char *src, size_t vol)
 {
 	char			*string1;
